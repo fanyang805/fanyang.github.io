@@ -96,6 +96,9 @@ a, table.table a {
   }
   .navbar-brand {
     color: var(--global-text-color);
+    &:hover {
+      color: var(--global-hover-color);
+    }
   }
   .navbar-nav .nav-item .nav-link {
     color: var(--global-text-color);
@@ -181,7 +184,7 @@ a, table.table a {
 .social {
   text-align: center;
   .contact-icons {
-    font-size: 4rem;
+    font-size: 2rem;
     a {
       i::before {
         color: var(--global-text-color);

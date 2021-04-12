@@ -8,6 +8,8 @@ posteryear: [2019, 2018, 2017]
 nav: true
 ---
 
+## Publications
+
 <div class="publications">
 
 {% assign y= 2020 %}
@@ -24,6 +26,7 @@ nav: true
 
 </div>
 
+<br/><br/>
 ## Abstracts and Posters
 
 <div class="publications">

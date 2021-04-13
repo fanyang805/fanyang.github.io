@@ -27,7 +27,7 @@ nav: true
 </div>
 
 <br/><br/>
-## Abstracts and Posters
+## Workshop publications
 
 <div class="publications">
 

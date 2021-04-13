@@ -6,6 +6,22 @@ description:
 nav: true
 ---
 
-For now, this page is assumed to be a static description of your courses. You can convert it to a collection similar to `_projects/` so that you can have a dedicated page for each course.
+## Delegate Reviewer
 
-Organize your courses by years, topics, or universities, however you like!
+IEEE Robotics and Automation Letters (RA-L): 2020.  
+IEEE International Conference on Robotics and Automation (ICRA): 2018, 2019, 2020.  
+IEEE International Conference on Automation Science and Engineering (CASE): 2018.  
+IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS): 2018.  
+
+## Teaching Assistant
+
+MEC 325 Manufacturing Processes: Spring 2020.  
+MEC 411 Control System Analysis and Design: Fall 2019.  
+MEC 203 Engineering Graphics and CAD: Spring 2016, Spring 2017.  
+MEC 310 Introduction to Machine Design: Fall 2015, Fall 2016.  
+MEC 410 Design of Machine Elements: Spring 2016.  
+
+## Mentorship
+
+<a href="https://www.stonybrook.edu/commcms/simons/simonsfellows/_pdfs/Simons%20Program%20Summer%202018.pdf" target="_blank">2018 Simons Summer Research Program</a>, project title: Novel Distributed Algorithm for Optimally Selecting Leaders in Supervisory Robotic Swarm Control.  
+Senior Design for undergraduate student.

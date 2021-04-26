@@ -8,7 +8,7 @@ posteryear: [2019, 2018, 2017]
 nav: true
 ---
 
-## Publications
+<!-- ## Publications -->
 
 <div class="publications">
 

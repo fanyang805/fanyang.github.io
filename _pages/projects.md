@@ -6,24 +6,11 @@ description: A growing collection of your cool projects.
 nav: true
 ---
 
-<div class="projects grid">
-
-  {% assign sorted_projects = site.projects | sort: "importance" %}
-  {% for project in sorted_projects %}
-  <div class="grid-item">
-    {% if project.redirect %}
-    <a href="{{ project.redirect }}" target="_blank">
-    {% else %}
-    <a href="{{ project.url | relative_url }}">
-    {% endif %}
-      <div class="card hoverable">
-        {% if project.img %}
-        <img src="{{ project.img | relative_url }}" alt="project thumbnail">
-        {% endif %}
-        <div class="card-body">
-          <h2 class="card-title text-lowercase">{{ project.title }}</h2>
-          <p class="card-text">{{ project.description }}</p>
-          <div class="row ml-1 mr-1 p-0">
+{% assign sorted_projects = site.projects | sort: "importance" %}
+<ul class="post-list">
+{% for project in sorted_projects %}
+  <li>
+      <h3><a class="project-title" {% if project.not_empty%} href="{{ project.url | relative_url }}" {% endif %}>{{ project.title }}
             {% if project.github %}
             <div class="github-icon">
               <div class="icon" data-toggle="tooltip" title="Code Repository">
@@ -36,12 +23,22 @@ nav: true
               </span>
               {% endif %}
             </div>
-            {% endif %}
-          </div>
-        </div>
+            {% endif %}</a></h3>
+      <p>{{project.description}}</p>
+      <!-- {{project.img}} -->
+      <div class="card hoverable">
+        {% if project.images %}
+          {% for image in project.images %}
+          <img class="img-responsive" src="{{ image.path | relative_url}}" alt="project thumbnail">
+            <div class="card-body">
+              <!-- <h2 class="card-title text-lowercase">{{ project.title }}</h2> -->
+              <p class="card-text">{{ image.text }}</p>
+              <div class="row ml-1 mr-1 p-0"></div>
+            </div>
+          {% endfor %}
+        <!-- <img src="{{ project.img | relative_url }}" alt="project thumbnail"> -->
+        {% endif %}
       </div>
-    </a>
-  </div>
+  </li>
 {% endfor %}
-
-</div>
+</ul>

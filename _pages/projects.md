@@ -33,7 +33,7 @@ nav: true
             <div class="card-body">
               <!-- <h2 class="card-title text-lowercase">{{ project.title }}</h2> -->
               <p class="card-text">{{ image.text }}</p>
-              <div class="row justify-content-center"></div>
+              <!-- <div class="row justify-content-center"></div> -->
               <!-- <div class="row ml-1 mr-1 p-0"></div> -->
             </div>
           {% endfor %}

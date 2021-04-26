@@ -29,7 +29,7 @@ nav: true
       <div class="card hoverable">
         {% if project.images %}
           {% for image in project.images %}
-          <img class="img-responsive" src="{{ image.path | relative_url}}" alt="project thumbnail">
+          <img class="img-fluid" src="{{ image.path | relative_url}}" alt="project thumbnail">
             <div class="card-body">
               <!-- <h2 class="card-title text-lowercase">{{ project.title }}</h2> -->
               <p class="card-text">{{ image.text }}</p>

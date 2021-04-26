@@ -35,6 +35,21 @@ nav: true
               <p class="card-text">{{ image.text }}</p>
               <!-- <div class="row justify-content-center"></div> -->
               <!-- <div class="row ml-1 mr-1 p-0"></div> -->
+              <div class="row justify-content-center">
+                {% if project.github %}
+                <div class="github-icon">
+                  <div class="icon" data-toggle="tooltip" title="Code Repository">
+                    <a href="{{ project.github }}" target="_blank"><i class="fab fa-github gh-icon"></i></a>
+                  </div>
+                  {% if project.github_stars %}
+                  <span class="stars" data-toggle="tooltip" title="GitHub Stars">
+                    <i class="fas fa-star"></i>
+                    <span id="{{ project.github_stars }}-stars"></span>
+                  </span>
+                  {% endif %}
+                </div>
+                {% endif %}
+              </div>
             </div>
           {% endfor %}
         <!-- <img src="{{ project.img | relative_url }}" alt="project thumbnail"> -->
@@ -43,3 +58,5 @@ nav: true
   </li>
 {% endfor %}
 </ul>
+
+

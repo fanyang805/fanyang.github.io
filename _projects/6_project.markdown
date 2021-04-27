@@ -5,4 +5,5 @@ description: a project with no image
 img:
 importance: 4
 not_empty: false
+category: fun
 ---

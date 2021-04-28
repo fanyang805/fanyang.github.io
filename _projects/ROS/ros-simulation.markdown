@@ -31,10 +31,10 @@ Note that ROS noetic does not support the parameter `tf_prefix` in `robot_state_
 
 ## SLAM in Gazebo
 
-(1) Open the Gazebo simulation environment
+(1) Open the Gazebo simulation environment  
 `roslaunch ros_sim turtlebot3_world.launch`
 
-(2) Run the SLAM nodes
+(2) Run the SLAM nodes  
 `roslaunch ros_sim turtlebot3_slam.launch`
 
 (3) Now we need robot to move around the unknown area and compute the occupancy map. A simple method to control the robot is to publish the twist message to topic `/cmd_vel` or use a teleop node. However controlling robot directly may cause the collision with the obstacle especially for people (like me) not comfortable with keyboard teleop. Here we use move_base node so that we can specify the goal pose by clicking on 2D Nav Goal button on rviz tool panel and move_base node can compute a safer velocity command based on the odometry and laser scan reading.
@@ -45,7 +45,7 @@ Note that ROS noetic does not support the parameter `tf_prefix` in `robot_state_
     </div>
 </div>
 <br/>
-(4) Save the map after scanning every corner of the map.
+(4) Save the map after scanning every corner of the map.  
 `rosrun map_server map_saver -f ~/map`
 
 <div class="row justify-content-center">
@@ -75,10 +75,10 @@ Complete video:
 
 ## Navigation in Gazebo
 
-(1) Open the Gazebo simulation environment
+(1) Open the Gazebo simulation environment  
 `roslaunch ros_sim turtlebot3_world.launch`
 
-(2) Run the navigation nodes
+(2) Run the navigation nodes  
 `roslaunch ros_sim turtlebot3_navigation.launch`
 
 (3) Specify the initial pose of robot by 2D Pose Estimate in rviz. This is used for initilizing the amcl localization node. It is not necessary to specify the exact initial pose because amcl node can adjust the robot's pose properly by laser scan.
@@ -112,10 +112,10 @@ Complete video:
 
 Note: this example requires <a href="https://github.com/hrnr/m-explore" target="blank">multirobot_map_merge package</a>. Please make sure the package and the dependencies are properly installed.
 
-(1) Open the gazebo environment with multiple robots
+(1) Open the gazebo environment with multiple robots  
 `roslaunch ros_sim multi_turtlebot3_slam_world.launch`
 
-(2) Run the multi-robot slam nodes
+(2) Run the multi-robot slam nodes  
 `roslaunch ros_sim multi_turtlebot3_slam.launch`
 
 (3) Specify the goal poses for multiple robots. There are two 2D Nav Goal bottons in rviz. Each robot will be exploiting the unknown area and create its own map. The maps are published to the map merge node through topic `/tb3_#/map` (where # is the index of the robot).
@@ -127,7 +127,7 @@ Note: this example requires <a href="https://github.com/hrnr/m-explore" target="
 </div>
 <br/>
 
-(4) Save the map after every corner of the map is scanned by robots together.
+(4) Save the map after every corner of the map is scanned by robots together.  
 `rosrun map_server map_saver -f ~/map`
 
 <div class="row justify-content-center">
@@ -158,10 +158,10 @@ Complete video:
 
 ## Multi-robot navigation
 
-(1) Open the gazebo environment with multiple robots.
+(1) Open the gazebo environment with multiple robots.  
 `roslaunch ros_sim multi_turtlebot3_nav_world.launch`
 
-(2) Run multi-robot navigation nodes.
+(2) Run multi-robot navigation nodes.  
 `roslaunch ros_sim multi_turtlebot3_navigation.launch`
 
 (3) Specify the initial poses of each robot in rviz. This step initialized the amcl node for each robot. It is ok to just specify the approximate poses.

@@ -3,7 +3,7 @@ layout: page
 title: Memory Management Chatbot 
 description: |
  The chatbot will talk with you about basic concepts in C++ memory management. You can ask related topic of memory management in C++, like unique pointer and get answer from chatbot. In this program, the smart pointers and move semantics are used to manage resources and optimize the code. 
-img: /projects/Cpp/assets/img/chatbot/membot_demo.gif
+# img: /projects/Cpp/assets/img/chatbot/membot_demo.gif
 importance: 3
 category: Cpp
 github: https://github.com/yangfan/Memory-Management-Chatbot
@@ -18,10 +18,8 @@ This project creates a simple ChatBot using C++. The ChatBot (or MemBot) will in
 
 Text file [`answergraph.txt`](src/answergraph.txt) defines a knowledge graph, where each node represents an answer and edge represents user query. The most related answer is selected based on the  Levenshtein distance. In this project, smart pointers are used to manage the memory allocation. 
 
-![GitHub](images/membot_demo.gif)
-
 <div class="row justify-content-center">
-    <div class="col">
+    <div class="col-10">
       <div class="w-50 mx-auto" style="background-color: white;">
           <img class="img-fluid z-depth-1" src="{{ '/projects/Cpp/assets/img/chatbot/membot_demo.gif' | relative_url }}" alt=""/>
       </div>

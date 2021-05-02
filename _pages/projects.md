@@ -5,13 +5,13 @@ permalink: /projects/
 description: A growing collection of your cool projects.
 nav: true
 display_categories:
-  - title: multi-robot-system
+  - title: Multi-robot System
     horizontal: false
   - title: ROS
     horizontal: false 
-  - title: Cpp
+  - title: Machine Learning 
     horizontal: true
-  - title: work
+  - title: Cpp
     horizontal: true
 ---
 <div class="projects">

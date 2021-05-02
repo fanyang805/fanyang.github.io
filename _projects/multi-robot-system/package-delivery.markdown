@@ -6,8 +6,8 @@ description: |
 
 img: /projects/multi-robot-system/assets/img/fullview.gif
 importance: 1
-category: multi-robot-system
-github: https://github.com/yangfan/ros_sim
+category: Multi-robot System
+github: https://github.com/yangfan/warehouseRobot
 images:
   - path: projects/multi-robot-system/assets/img/fullview.gif
     column: 1
@@ -17,7 +17,7 @@ not_empty: true
 This project designs a multi-robot system working in the warehouse facility or distribution center. The robots are moving around the facility to pick up packages from the loading stations and delivering them to unloading stations for storing or processing as shown in the figure below. It is assumed that the occupancy grid map that represents the free and occupied space is available. However there could be other uncontrolled moving agents working in the same environment and those agents cannot be included in the occupancy map. In this project, the robots working in the open environment are able to avoid both the obstacles represented in the occupancy grid map and the uncontrolled agents. 
 
 <div class="row justify-content-center">
-    <div class="col-6">
+    <div class="col-9">
         <img class="img-fluid rounded z-depth-1" src="{{ 'projects/multi-robot-system/assets/img/warehouse.png' | relative_url }}" alt=""/>
     </div>
 </div>  

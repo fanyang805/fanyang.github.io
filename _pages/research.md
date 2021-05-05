@@ -5,5 +5,3 @@ title: Research
 description: 
 nav: true
 ---
-
-### Delegate Reviewer

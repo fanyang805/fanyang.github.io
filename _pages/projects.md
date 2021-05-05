@@ -13,6 +13,8 @@ display_categories:
     horizontal: true
   - title: Cpp
     horizontal: true
+  - title: work
+    horizontal: true
 ---
 <div class="projects">
   {% if site.enable_project_categories and page.display_categories %}

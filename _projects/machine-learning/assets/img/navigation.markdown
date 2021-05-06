@@ -65,7 +65,7 @@ where $$\alpha, \beta > 0, \lambda<0$$ are coefficients, $$d$$ refers to the min
 
 ## Training results
 
-Here the transfer learning is used to reduce the training time.  A model trained for collision-avoidance is used as the starting point.
+Here the transfer learning is used to reduce the training time.  A model trained for collision-avoidance is used as a starting point.
 
 The training results are shown below. In right figure, robot moves to the goal pose and thus obtains the highest episode reward.
 <div class="row justify-content-sm-center">

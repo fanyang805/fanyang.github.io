@@ -67,7 +67,7 @@ where $$\alpha, \beta > 0, \lambda<0$$ are coefficients, $$d$$ refers to the min
 
 Here the transfer learning is used to reduce the training time.  A model trained for collision-avoidance is used as a starting point.
 
-The training results are shown below. In right figure, robot moves to the goal pose and thus obtains the highest episode reward.
+The training results are shown below. In right figure, robot moves to the goal pose (marked by the blue circle) and thus obtains the highest episode reward.
 <div class="row justify-content-sm-center">
     <div class="col-sm-4 mt-3 mt-md-0">
         <img class="img-fluid rounded z-depth-1" src="{{ '/projects/machine-learning/assets/img/navigation/train82.gif'| relative_url }}" alt="" title="example image"/>
@@ -92,12 +92,12 @@ To run the simulation, first create the variables used in the agent and environm
 Then set up training parameters like sample time, discount factor, minibatch size, and perform training.  
 `trainAgent`
 
-After the training, performance simulation with the trianed robots and visualize the results.
+After the training, perform the simulation with the trianed robots and visualize the results.
 
 ```
 out=sim('MobileRobotObstacleAvoidanceWithTarget.slx');
 showResults;
 ```
 
-The robot in the figure of the right side is contained in the demo folder. To see the results without training:
+The trained robot in the figure on the right side is contained in the demo folder. To see the results without training:
 `demo`

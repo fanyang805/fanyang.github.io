@@ -11,9 +11,9 @@ display_categories:
     horizontal: false 
   - title: Machine Learning 
     horizontal: true
-  - title: Cpp
+  - title: Localization 
     horizontal: true
-  - title: work
+  - title: Cpp
     horizontal: true
 ---
 <div class="projects">

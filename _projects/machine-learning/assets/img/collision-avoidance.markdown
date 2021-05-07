@@ -134,7 +134,7 @@ To run the simulation, first create the variables used in the agent and environm
 Then set up training parameters like sample time, discount factor, minibatch size, and perform training.  
 `trainAgentMulti`
 
-After the training, performance simulation with the trianed robots and visualize the results.
+After the training, perform the simulation with the trianed robots and visualize the results.
 
 ```
 out= sim('MultiMobileRobotObstacleAvoidance.slx');

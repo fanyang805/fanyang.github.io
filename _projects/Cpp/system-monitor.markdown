@@ -2,7 +2,7 @@
 layout: page
 title: System Monitor 
 description: |
- The system monitor for linux operation system. It provides information such as cpu usage, memory usage, processes information. The program reads system information from various files in directories like /proc/ and /etc/, computes parameters and shows them in a graphic interface in terminal.
+ The system monitor for linux operation system created using C++. It provides information such as cpu usage, memory usage, processes information. The program reads system information from various files in directories like /proc/ and /etc/, computes parameters and shows them in a graphic interface in terminal.
 img: /projects/Cpp/assets/img/system-monitor/system_monitor.png
 importance: 2
 category: Cpp

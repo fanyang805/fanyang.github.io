@@ -137,7 +137,7 @@ The extended Kalman Filter
 ### References
 
 1. **Introduction to Mobile Robotics**  
-   University of Freiburg, Spring, 2020, [http://ais.informatik.uni-freiburg.de/teaching/ss20/robotics/index_en.php](http://ais.informatik.uni-freiburg.de/teaching/ss20/robotics/index_en.php).
+   University of Freiburg, Spring, 2020, [http://ais.informatik.uni-freiburg.de/teaching/ss20/robotics/index_en.php](http://ais.informatik.uni-freiburg.de/teaching/ss20/robotics/index_en.php)
 
 2. **Probabilistic Robotics**  
    S. Thrun, W. Burgard, and D. Fox. MIT Press, Cambridge, Mass., (2005)

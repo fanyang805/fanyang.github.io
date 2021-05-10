@@ -110,7 +110,7 @@ The extended Kalman Filter
     \begin{bmatrix}
         1 & 0 & -\delta_{tran} \sin(\mu_{\theta_{t-1}}+\delta_{rot1}) \\
         0 & 1 & \delta_{tran} \cos(\mu_{\theta_{t-1}}+\delta_{rot1})  \\
-        0 & 1 & 1 
+        0 & 0 & 1 
     \end{bmatrix}
     $$  
 

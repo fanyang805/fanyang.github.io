@@ -11,6 +11,8 @@ display_categories:
     horizontal: false 
   - title: Machine Learning 
     horizontal: true
+  - title: SLAM
+    horizontal: true
   - title: Localization 
     horizontal: true
   - title: Mapping 

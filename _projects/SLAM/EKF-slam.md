@@ -1,6 +1,6 @@
 ---
 layout: page
-title: SLAM with Extended Kalman Filter 
+title: Online SLAM with Extended Kalman Filter 
 description: |
     The first SLAM solution in history is based on the Extended Kalman Filter. This project implements an EKF SLAM system. Given the sensor readings and odometry information, the robot computes a feature-based map while simultaneously localizing itself.
 img: /projects/SLAM/EKF-slam/assets/img/ekf_slam.gif

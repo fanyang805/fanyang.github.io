@@ -17,6 +17,8 @@ display_categories:
     horizontal: true
   - title: Mapping 
     horizontal: true
+  - title: Planning 
+    horizontal: true
   - title: Cpp
     horizontal: true
 ---

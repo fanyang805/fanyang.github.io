@@ -3,9 +3,9 @@ layout: page
 title: Occupancy Grid Map 
 description: |
     Buiding Map is a fundamental problem in mobile robotics. Many applications like localization, path planning, navigation depend on the map of the environment. This project implements the occupancy grid mapping algorithm with the assumption that the robot poses are known.   
-img: /projects/mapping/ogm/assets/img/gridmap-s1.gif
+img: /projects/mapping/ogm/assets/img/cover.gif
 importance: 1
-category: Mapping 
+category: Mapping & Planning
 github: https://github.com/yangfan/probabilitics-robotics/tree/master/Grid_map
 images:
   - path: 

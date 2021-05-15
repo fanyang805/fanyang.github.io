@@ -11,13 +11,13 @@ display_categories:
     horizontal: false 
   - title: Machine Learning 
     horizontal: true
+  - title: Computer Vision 
+    horizontal: true
   - title: SLAM
     horizontal: true
   - title: Localization 
     horizontal: true
-  - title: Mapping 
-    horizontal: true
-  - title: Planning 
+  - title: Mapping & Planning 
     horizontal: true
   - title: Cpp
     horizontal: true

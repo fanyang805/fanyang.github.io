@@ -14,7 +14,7 @@ images:
 not_empty: true
 ---
 
-In project [mobile robot collision-avoidance](/projects/machine-learning/assets/img/collision-avoidance/), we train the robot to learn a policy to avoid the obstacle in the environment. Although the robot is able to avoid the obstacle, it moves randomly which does not have any useful application in practice. In this project, we extend the model to the mobile robot navigation. Specifically robot should learn a policy to move to a pose in the map.
+In project [mobile robot collision-avoidance]({% link _projects/machine-learning/collision-avoidance.markdown %}), we train the robot to learn a policy to avoid the obstacle in the environment. Although the robot is able to avoid the obstacle, it moves randomly which does not have any useful application in practice. In this project, we extend the model to the mobile robot navigation. Specifically robot should learn a policy to move to a pose in the map.
 
 ## Model Overview
 

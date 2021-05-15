@@ -5,7 +5,7 @@ description: |
   This project implements path planning algorithms that compute the path in graphs from a start to a goal using Python. Given a occupancy grid map, the algorithms construct a graph in which each free cell is consider a node and any two free cells are considered connected if they are adjacent either horizontally, vertically or diagonally. Then Dijstra and A* algorithms are implemented to find the shortest path between the given two points.
 img: /projects/path-planning/a-star/assets/img/a5.gif
 importance: 1
-category: Planning 
+category: Mapping & Planning 
 github: https://github.com/yangfan/probabilitics-robotics/tree/master/Path_planning
 images:
   - path: 
@@ -16,19 +16,19 @@ not_empty: true
 
 Finding the shortest path between two nodes in a graph is a fundamental problem in mobile robotics. The graph can be computed from a occupancy grid map. In particular, each cell with low occupancy probability in the grid map is considered as a node while an edge connects two nodes if they are either vertically, horizontally or diagonally adjacent. 
 
-This project implement two path planning algorithms, Dijkstra's algorithm and A* algorithm.
+This project implements two path planning algorithms, Dijkstra's algorithm and A* algorithm.
 
 Dijkstra's algorithm is essentially generalized version of the best-first search, in the sense that at each time step the unvisited node with the smallest tentative distance is chosen as the current node. The general idea of Dijkstra's algorithm is
 
-1. Create a set of unvisited nodes with a initial tentative distance. In particular, the source node is set to zero while others are infinity.
+1. Create a set of unvisited nodes with an initial tentative distance. In particular, the source node is set to zero while others are infinity.
 
-2. Consider all unvisited neighbors of the current node (initially the source node) and update their tentative distance.
+2. Consider all unvisited neighbors of the current node (initially the source node) and update their tentative distances.
 
 3. Mark the current node as visited which will never be checked again. If the target node is now visited, the algorithm stops. Otherwise, select the node with the smallest tentative distance as the new current node and go back to the previous step.
 
 In fact, the precedures above describe not only Dijkstra's algorithm but also A* algorithm. The only difference is how to compute the tentative distance. In Dijkstra's algorithm, the tentative distance is equal to the distance from the source to the current node plus the distance from current node to the neighbor. For A* algorithm, in addition to the distance computed in Dijkstra, one heuristic value is also counted. To find the optimal path, this heuristic value should always be less than or equal to the optimal distance from the neighbor to the goal, e.g, the straight line distance in the Euclidean space.
 
-In this project, both Dijkstra's algorithm and A* algorithm are implemented. In particular, we implement A* algorithm with different heuristic value which influence the number of iterations and the optimality of the solution.
+In this project, both Dijkstra's algorithm and A* algorithm are implemented. In particular, we implement A* algorithm with different heuristic value which influence the number of cells expanded and the optimality of the solution.
 
 ## Code Explanation
 
@@ -38,7 +38,7 @@ In this project, both Dijkstra's algorithm and A* algorithm are implemented. In 
 
 3. `get_heuristic(cell, goal):` Estimate cost for moving from cell to goal based on heuristic. The cost is equal to the Euclidean distance between the `cell` and `goal` multiplied by a constant factor.
 
-4. `run_path_planning(occ_map, start, goal)`: Implement overall procedures mentioned above. The previous two functions are called to compute the tentative cost of the neighbors.
+4. `run_path_planning(occ_map, start, goal)`: Implement overall procedures described above. The previous two functions are called to compute the tentative cost of the neighbors.
 
 ## Results
 

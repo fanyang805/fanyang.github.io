@@ -14,7 +14,7 @@ images:
 not_empty: true
 ---
 
-A key problem for range-bearing sensors is known as the data association problem, which arises when landmarks cannot be uniquely identified. Therefore some residual uncertainty exists with regards to the identity of a landmark. A similar problem happens in the graph construction of the GraphSLAM (see more detail in [here]({% link _projects/SLAM/Graph-based-slam.md %})). We need to match the observation to obtain the constraint. The problem arises when only the range-bearing sensor is used. For example, the robot may not distinguish the laser range data for the corridors because the corridors may look exactly the same from a laser sensor.
+A key problem for range-bearing sensors is known as the data association problem, which arises when landmarks cannot be uniquely identified. Therefore some residual uncertainty exists with regards to the identity of a landmark. A similar problem happens in the graph construction of the GraphSLAM (see more details in [here]({% link _projects/SLAM/Graph-based-slam.md %})). We need to match the observation to obtain the constraint. The problem arises when only the range-bearing sensor is used. For example, the robot may not distinguish the laser range data for the corridors because the corridors may look exactly the same from a laser sensor.
 
 To obtain the addition information of the map features, we can use camera to take the images of the environment and comparing those images to distinguish the map features. For example, we can write numbers on walls of different corridors. The robot can tell if the observed corridor is the same one observed before by comparing the images. 
 
@@ -90,7 +90,7 @@ There are four executables created in `results/bin`. More specifically,
 3. `create_histograms`: compute the TF-IDF histograms of dataset images and store the corresponding vectors into `Reweighted_histogram.csv` file.
 4. `find_similar_imgs`: compute the SIFT feature descriptors of the query image and TF-IDF histogram. Compute the cosine distance between the vector of query image and dataset images in `Reweighted_histogram.csv` file. Create a html file that contains N most similar images in the dataset.
 
-The results is shown as following:
+Given the query image `imageCompressedCam0_0001880`, the program finds following most similar images in the dataset. 
 
 <div class="row justify-content-center">
     <div class="col">

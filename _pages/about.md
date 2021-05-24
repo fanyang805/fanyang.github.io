@@ -19,7 +19,7 @@ social: true  # includes social icons at the bottom of the page
 
 I recently received my PhD degree at Stony Brook University under the supervision of Prof. Nilanjan Chakraborty in Interacting Robotic Systems Laboratory. We investigate novel methodologies of task allocation, path planning with uncertain payoff and resource consumption for multi-robot systems.
 
-I am broadly interested in robotics, combinatorial optimization, and artificial intelligence. My research focuses on developing algorithms for multi-robot system that will coordinate robots to work robustly and reliably under the uncertain environment and enable long-term autonomy. I have worked on stochastic optimization, multi-robot task allocation, path planning, distributed algorithms, motion planning, SLAM and deep reinforcement learning.
+I am broadly interested in robotics, combinatorial optimization, and artificial intelligence. My research focuses on developing algorithms for multi-robot system that will coordinate robots to work robustly and reliably under the uncertain environment and enable long-term autonomy. I have worked on stochastic optimization, multi-robot task allocation, path planning, distributed algorithms, SLAM and deep reinforcement learning.
 
 <!-- Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com){:target="\_blank"}. You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 

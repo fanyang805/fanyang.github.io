@@ -21,6 +21,8 @@ I recently received my PhD degree at Stony Brook University under the supervisio
 
 I am broadly interested in robotics, combinatorial optimization, and artificial intelligence. My research focuses on developing algorithms for multi-robot system that will coordinate robots to work robustly and reliably under the uncertain environment and enable long-term autonomy. I have worked on stochastic optimization, multi-robot task allocation, path planning, distributed algorithms, SLAM and deep reinforcement learning.
 
+My cv is [here]({% link assets/pdf/cv_fanyang.pdf %}).
+
 <!-- Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com){:target="\_blank"}. You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
 Put your address / P.O. box / other info right below your picture. You can also disable any these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.

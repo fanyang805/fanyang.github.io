@@ -30,4 +30,5 @@ MEC 634 Advanced Topics in Kinematics and Dynamics of Machines
 
 <a href="http://ais.informatik.uni-freiburg.de/teaching/ss20/robotics/index_en.php" target="_bland">Introduction to Mobile Robotics</a> by Prof. Wolfram Burgard  
 <a href="http://ais.informatik.uni-freiburg.de/teaching/ws13/mapping/" target="_bland">Robot Mapping</a> by Prof. Cyrill Stachniss  
+<a href= "https://www.ipb.uni-bonn.de/teaching/cpp-2020/" target="_bland">Modern C++ for Computer Vision</a> by Prof. Cyrill Stachniss and Ignacio Vizzo  
 <a href="https://www.coursera.org/specializations/deep-learning" target="_bland">Deep Learning Specialization</a> by Andrew Ng

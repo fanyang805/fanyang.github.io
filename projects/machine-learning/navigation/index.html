@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Fan's site | Fan's site</title>
+<title>Fan's site | Mobile Robot Navigation using Reinforcement Learning</title>
 <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 ">
 
@@ -33,7 +33,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/projects/machine-learning/navigation/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -99,7 +99,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="/blog/">
               Blog 
               
@@ -107,8 +107,6 @@
           </li>
           
           <!-- Other pages -->
-          
-          
           
           
           
@@ -183,20 +181,102 @@
     <div class="container mt-5">
       <div class="post">
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2021/RL/">Reinforcement Learning</a></h3>
-        <p class="post-meta">May 2, 2021</p>
-        <p>A summary of Reinforcement Learning</p>
-      </li>
-    
-  </ul>
+  <header class="post-header">
+    <h1 class="post-title">Mobile Robot Navigation using Reinforcement Learning</h1>
+    <!-- <p class="post-description">This is a follow-up project of collision-avoidance using DDPG. In this project, instead of moving randomly without collision, robot is expected to move to a given pose in the map without collision. In addition to the sensor readings, robot also receives its current pose to determine the linear and angular velocity.   
+</p> -->
+  </header>
 
-  
+  <article>
+    <p>In project <a href="/projects/machine-learning/collision-avoidance/">mobile robot collision-avoidance</a>, we train the robot to learn a policy to avoid the obstacle in the environment. Although the robot is able to avoid the obstacle, it moves randomly which does not have any useful application in practice. In this project, we extend the model to the mobile robot navigation. Specifically robot should learn a policy to move to a pose in the map.</p>
 
+<h2 id="model-overview">Model Overview</h2>
+
+<p>Similar to previous project, we use DDPG to train the robot. There are four networks used in the training, i.e.,</p>
+
+<p>(1) Actor network 
+\(\mu(s|\theta^{\mu})\): take observation \(s\) and return action that maximize cumulative rewards.<br />
+(2) Target actor network 
+\(\mu'(s|\theta^{\mu'})\): improve the stability of the learning; the parameter \(\theta^{\mu'}\) is updated slowly.<br />
+(3) Critic network 
+\(Q(s,a|\theta^{Q})\): take observation \(s\) and action \(a\), return action-value.<br />
+(4) Target critic network 
+\(Q'(s,a|\theta^{Q'})\): improve the stability of the learning; the parameter \(\theta^{Q'}\) is updated slowly.</p>
+
+<p>The structure of the deep neural network used in actor and critic are shown below:</p>
+<div class="row justify-content-sm-center">
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="/projects/machine-learning/assets/img/navigation/actor.png" alt="" title="example image" />
+    </div>
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="/projects/machine-learning/assets/img/navigation/critic.png" alt="" title="example image" />
+    </div>
+</div>
+<div class="caption">
+  Actor Network (left), Critic Network (right)
+</div>
+<p><br /></p>
+
+<p>The state in this project includes three continuous variables for pose of robot (i.e., x, y coordinates, orientation) in addition to 7 range sensor readings in collision avoidance project.</p>
+<div class="row justify-content-center">
+    <div class="col">
+          <img class="img-fluid z-depth-1" src="/projects/machine-learning/assets/img/navigation/ddpg-nav.png" alt="" />
+    </div>
+</div>
+<div class="caption">
+Simulation Environment
+</div>
+<p><br /></p>
+
+<p>Give the action returned by the policy, the <code class="language-plaintext highlighter-rouge">differentialDriveKinematics</code> model computes the current pose which is received by the <code class="language-plaintext highlighter-rouge">rangeSensor</code> and <code class="language-plaintext highlighter-rouge">poseEval</code> functions. <code class="language-plaintext highlighter-rouge">rangeSensor</code> function returns the sensor readings and <code class="language-plaintext highlighter-rouge">poseEval</code> function computes the collision-free path length and cosine distance to the goal which are used to evaluate the current pose. Those two functions work as the trainsition function of the environment defined in MDP.</p>
+
+<p>We define the reward function as:
+\(R = \alpha d^2 + \beta v^2 + \lambda w^2 + f(x,y,\theta)\)</p>
+
+<p>where \(\alpha, \beta &gt; 0, \lambda&lt;0\) are coefficients, \(d\) refers to the minimum distance to the obstacle obtained from the sensor reading, \(v\) and \(w\) denote the linear and angular velocity, \(f(x,y,\theta)\) is a function to evaluate the current pose. In particular, \(f(x,y,\theta)\) is mostly evaluated by the path length and is not influenced much by the orientation \(\theta\) when robot is far away from the goal. When robot is close to the goal, the orientation (measured by cosine distance) has a higher weight than the distance in the pose evaluation function.</p>
+
+<h2 id="training-results">Training results</h2>
+
+<p>Here the transfer learning is used to reduce the training time.  A model trained for collision-avoidance is used as a starting point.</p>
+
+<p>The training results are shown below. In right figure, robot moves to the goal pose (marked by the blue circle) and thus obtains the highest episode reward.</p>
+<div class="row justify-content-sm-center">
+    <div class="col-sm-4 mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="/projects/machine-learning/assets/img/navigation/train82.gif" alt="" title="example image" />
+    </div>
+    <div class="col-sm-4 mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="/projects/machine-learning/assets/img/navigation/train91.gif" alt="" title="example image" />
+    </div>
+    <div class="col-sm-4 mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="/projects/machine-learning/assets/img/navigation/train96.gif" alt="" title="example image" />
+    </div>
+</div>
+<div class="caption">
+  Episode (iteration) 82 (left), Episode 91 (mid), Episode 96 (right)
+</div>
+<p><br /></p>
+
+<h2 id="running">Running</h2>
+
+<p>To run the simulation, first create the variables used in the agent and environment, e.g., robot parameters, range sensor parameters. Type following command in command window.<br />
+<code class="language-plaintext highlighter-rouge">createEnv</code></p>
+
+<p>Then set up training parameters like sample time, discount factor, minibatch size, and perform training.<br />
+<code class="language-plaintext highlighter-rouge">trainAgent</code></p>
+
+<p>After the training, perform the simulation with the trianed robots and visualize the results.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>out=sim('MobileRobotObstacleAvoidanceWithTarget.slx');
+showResults;
+</code></pre></div></div>
+
+<p>The trained robot in the figure on the right side is contained in the demo folder. To see the results without training:
+<code class="language-plaintext highlighter-rouge">demo</code></p>
+
+  </article>
 
 </div>
+
     </div>
 
     <!-- Footer -->

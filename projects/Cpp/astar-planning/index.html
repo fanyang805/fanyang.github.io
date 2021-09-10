@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Fan's site | Fan's site</title>
+<title>Fan's site | A* Route Planning Algorithm</title>
 <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 ">
 
@@ -33,7 +33,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/projects/Cpp/astar-planning/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -99,7 +99,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="/blog/">
               Blog 
               
@@ -107,8 +107,6 @@
           </li>
           
           <!-- Other pages -->
-          
-          
           
           
           
@@ -183,20 +181,144 @@
     <div class="container mt-5">
       <div class="post">
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2021/RL/">Reinforcement Learning</a></h3>
-        <p class="post-meta">May 2, 2021</p>
-        <p>A summary of Reinforcement Learning</p>
+  <header class="post-header">
+    <h1 class="post-title">A* Route Planning Algorithm</h1>
+    <!-- <p class="post-description">C++ implementation of A* route planning algorithm. Given the inital and goal position on a map downloaded from the Open Street Map, the algorithm will compute an optimal path in term of distance. The map information of the region is contained in the OSM file which is a XML-formatted data in the form of "nodes" (points), "ways" (connections), and "relations" (street and object properties, such as tags).      
+</p> -->
+  </header>
+
+  <article>
+    <p>In this project, I have implemented A* route planning algorithm in C++. Given the inital and goal position on a real-world map, the algorithm will compute an optimal path in term of distance.</p>
+
+<p>The map is downloaded from <a href="https://www.openstreetmap.org/" target="blank">OpenStreetMap</a>. The data structure used in A* algorithm, i.e., RouteModel is derived from a base class Model defined in the example codes in <a href="https://github.com/cpp-io2d/P0267_RefImpl" target="blank">IO2D library</a>. IO2D library also visualizes the result. Further the project requires <a href="https://pugixml.org/" target="blank">pugixml library</a> which is included in the thirdparty folder.</p>
+
+<div class="row justify-content-center">
+    <div class="col">
+      <div class="w-50 mx-auto" style="background-color: white;">
+          <img class="img-fluid z-depth-1" src="/projects/Cpp/assets/img/astar/route-planning.png" alt="" />
+      </div>
+    </div>
+</div>
+<p><br /></p>
+
+<h2 id="cloning">Cloning</h2>
+
+<p>When cloning this project, be sure to use the <code class="language-plaintext highlighter-rouge">--recurse-submodules</code> flag.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/yangfan/Astar-Route-Planning.git --recurse-submodules
+</code></pre></div></div>
+
+<h2 id="compiling-and-running">Compiling and Running</h2>
+
+<h3 id="compiling">Compiling</h3>
+
+<p>To compile the project, first, create a <code class="language-plaintext highlighter-rouge">build</code> directory and change to that directory:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir build &amp;&amp; cd build
+</code></pre></div></div>
+
+<p>From within the <code class="language-plaintext highlighter-rouge">build</code> directory, then run <code class="language-plaintext highlighter-rouge">cmake</code> and <code class="language-plaintext highlighter-rouge">make</code> as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake ..
+make
+</code></pre></div></div>
+
+<h3 id="running">Running</h3>
+
+<p>The executable will be placed in the <code class="language-plaintext highlighter-rouge">results/bin/</code> directory. At root path of the project, you can run the project as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./results/bin/OSM_A_star_search 
+</code></pre></div></div>
+
+<p>Or to specify a map file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./results/bin/OSM_A_star_search -f ../&lt;your_osm_file.osm&gt;
+</code></pre></div></div>
+
+<p>For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./results/bin/OSM_A_star_search
+To specify a map file use the following format: 
+Usage: [executable] [-f filename.osm]
+Reading OpenStreetMap data from the following file: ./data/map.osm
+Please input the start_x: 
+10
+Please input the start_y: 
+20
+Please input the end_x: 
+90
+Please input the end_y: 
+60
+Distance: 982.793 meters. 
+</code></pre></div></div>
+
+<p>The output path is shown in figure above.</p>
+
+<h2 id="summary-of-a">Summary of A*</h2>
+
+<p>A*(map, initial_position, goal_position)</p>
+
+<ol>
+  <li>Initialization
+    <ul>
+      <li>start_x, start_y, end_x, end_y</li>
+      <li>create RouteModel from given map</li>
+      <li>for all nodes
+        <ul>
+          <li>g = inf, h = euclidean distance to the end node, visited = false, explored = false</li>
+        </ul>
       </li>
-    
-  </ul>
+      <li>g(start_node) = 0</li>
+      <li>add the start node to the open list</li>
+    </ul>
+  </li>
+  <li>While the open list is not empty
+    <ul>
+      <li>sort the open list by f = g + h</li>
+      <li>current node becomes the node with the least f value, marked as visited, deleted from open list</li>
+      <li>if current node is the goal node
+        <ul>
+          <li>break</li>
+        </ul>
+      </li>
+      <li>else for each unvisited neighbor of current node
+        <ul>
+          <li>compute g = g(current) + dist(current, neighbor)</li>
+          <li>if g &lt; g(neighbor)
+            <ul>
+              <li>mark parent(neighbor) = current</li>
+              <li>g(neighbor) = g</li>
+            </ul>
+          </li>
+          <li>if neighbor is not explored yet
+            <ul>
+              <li>add neighbor to the open list</li>
+              <li>mark neighbor as explored</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>if current node is the goal node
+    <ul>
+      <li>find path by sequentially travelling parent of nodes starting from the current node</li>
+    </ul>
+  </li>
+</ol>
 
-  
+<ul>
+  <li>else no path is found</li>
+</ul>
 
+<h2 id="credits">Credits</h2>
+
+<p>This project is created based on the <a href="https://github.com/udacity/CppND-Route-Planning-Project" target="blank">course metrials</a> of Udacity C++ Nanodegree Program.</p>
+
+  </article>
 
 </div>
+
     </div>
 
     <!-- Footer -->

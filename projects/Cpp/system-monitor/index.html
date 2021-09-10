@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Fan's site | Fan's site</title>
+<title>Fan's site | System Monitor</title>
 <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 ">
 
@@ -33,7 +33,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/projects/Cpp/system-monitor/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -99,7 +99,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="/blog/">
               Blog 
               
@@ -107,8 +107,6 @@
           </li>
           
           <!-- Other pages -->
-          
-          
           
           
           
@@ -183,20 +181,126 @@
     <div class="container mt-5">
       <div class="post">
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2021/RL/">Reinforcement Learning</a></h3>
-        <p class="post-meta">May 2, 2021</p>
-        <p>A summary of Reinforcement Learning</p>
-      </li>
-    
-  </ul>
+  <header class="post-header">
+    <h1 class="post-title">System Monitor</h1>
+    <!-- <p class="post-description">The system monitor for linux operation system created using C++. It provides information such as cpu usage, memory usage, processes information. The program reads system information from various files in directories like /proc/ and /etc/, computes parameters and shows them in a graphic interface in terminal.
+</p> -->
+  </header>
 
-  
+  <article>
+    <p>In this project, I created a simple system monitor using c++. As shown in figure below, the system monitor provides the system information and processes information.</p>
 
+<div class="row justify-content-center">
+    <div class="col-8">
+          <img class="img-fluid z-depth-1" src="/projects/Cpp/assets/img/system-monitor/system_monitor.png" alt="" />
+    </div>
+</div>
+<p><br /></p>
+
+<p>The information is obtained from files in linux system. The path of these directories are presented in the table below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Info</th>
+      <th>directory path</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OS</td>
+      <td><code class="language-plaintext highlighter-rouge">/etc/os-release</code></td>
+    </tr>
+    <tr>
+      <td>Kernal</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/version</code></td>
+    </tr>
+    <tr>
+      <td>CPU</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/stat</code></td>
+    </tr>
+    <tr>
+      <td>Memory</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/meminfo</code></td>
+    </tr>
+    <tr>
+      <td>Total Processes</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/stat</code></td>
+    </tr>
+    <tr>
+      <td>Running Processes</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/stat</code></td>
+    </tr>
+    <tr>
+      <td>Up Time</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/uptime</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+Note that the memory usage shown in this system monitor is non-cache/buffer memory.</p>
+
+<p>The files containing processes information are located in <code class="language-plaintext highlighter-rouge">/proc/</code> directory. The PID is shown as the directory name in <code class="language-plaintext highlighter-rouge">/proc/</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Info</th>
+      <th>directory path</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USER</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/[pid]/status</code>, <code class="language-plaintext highlighter-rouge">/etc/passwd</code></td>
+    </tr>
+    <tr>
+      <td>CPU Usage</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/[pid]/stat</code></td>
+    </tr>
+    <tr>
+      <td>Memory Usage</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/[pid]/status</code></td>
+    </tr>
+    <tr>
+      <td>Up Time</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/[pid]/stat</code></td>
+    </tr>
+    <tr>
+      <td>Command</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/[pid]/cmdline</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h2 id="compiling-and-running">Compiling and Running</h2>
+
+<h3 id="compiling">Compiling</h3>
+
+<p>This project requires <a href="https://www.gnu.org/software/ncurses/">ncurses</a> for displaying outputs. Install this library by command in terminal:<br />
+<code class="language-plaintext highlighter-rouge">sudo apt install libncurses5-dev libncursesw5-dev</code>.</p>
+
+<p>After installation of dependencies, clone this project and create build directory in root of the project.<br />
+<code class="language-plaintext highlighter-rouge">mkdir build &amp;&amp; cd build</code>.</p>
+
+<p>Then run <code class="language-plaintext highlighter-rouge">cmake ..</code> and <code class="language-plaintext highlighter-rouge">make</code> in <code class="language-plaintext highlighter-rouge">build</code> directory.</p>
+
+<h3 id="running">Running</h3>
+
+<p>The executable is in <code class="language-plaintext highlighter-rouge">results/</code> directory. To run the system monitor, go to root directory of the project and run command:<br />
+<code class="language-plaintext highlighter-rouge">./results/monitor</code>.</p>
+
+<h2 id="credits">Credits</h2>
+
+<p>Starter code for System Monitor Project in the Object Oriented Programming Course of the <a href="https://www.udacity.com/course/c-plus-plus-nanodegree--nd213">Udacity C++ Nanodegree Program</a>.</p>
+
+  </article>
 
 </div>
+
     </div>
 
     <!-- Footer -->

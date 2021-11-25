@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Fan's site | Fan's site</title>
+<title>Fan's site | Memory Management Chatbot</title>
 <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 ">
 
@@ -33,7 +33,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/projects/Cpp/chatbot/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -99,7 +99,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="/blog/">
               Blog 
               
@@ -107,8 +107,6 @@
           </li>
           
           <!-- Other pages -->
-          
-          
           
           
           
@@ -183,20 +181,73 @@
     <div class="container mt-5">
       <div class="post">
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2021/RL/">Reinforcement Learning</a></h3>
-        <p class="post-meta">May 2, 2021</p>
-        <p>A summary of Reinforcement Learning</p>
-      </li>
-    
-  </ul>
+  <header class="post-header">
+    <h1 class="post-title">Memory Management Chatbot</h1>
+    <!-- <p class="post-description">The chatbot will talk with you about basic concepts in C++ memory management. You can ask related topic of memory management in C++, like unique pointer and get answer from chatbot. In this program, the smart pointers and move semantics are used to manage resources and optimize the code. 
+</p> -->
+  </header>
 
-  
+  <article>
+    <p>This project creates a simple ChatBot using C++. The ChatBot (or MemBot) will introduce some basic concepts about the memory management in C++. The ChatBot will provide you the information based on the topic you type in, e.g., pointers.</p>
 
+<p>Text file <a href="src/answergraph.txt"><code class="language-plaintext highlighter-rouge">answergraph.txt</code></a> defines a knowledge graph, where each node represents an answer and edge represents user query. The most related answer is selected based on the  Levenshtein distance. In this project, smart pointers are used to manage the memory allocation.</p>
+
+<div class="row justify-content-center">
+    <div class="col-10">
+      <div class="w-50 mx-auto" style="background-color: white;">
+          <img class="img-fluid z-depth-1" src="/projects/Cpp/assets/img/chatbot/membot_demo.gif" alt="" />
+      </div>
+    </div>
+</div>
+<p><br /></p>
+
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+  <li>cmake &gt;= 3.11
+    <ul>
+      <li>All OSes: <a href="https://cmake.org/install/">click here for installation instructions</a></li>
+    </ul>
+  </li>
+  <li>make &gt;= 4.1 (Linux, Mac), 3.81 (Windows)
+    <ul>
+      <li>Linux: make is installed by default on most Linux distros</li>
+      <li>Mac: <a href="https://developer.apple.com/xcode/features/">install Xcode command line tools to get make</a></li>
+      <li>Windows: <a href="http://gnuwin32.sourceforge.net/packages/make.htm">Click here for installation instructions</a></li>
+    </ul>
+  </li>
+  <li>gcc/g++ &gt;= 5.4
+    <ul>
+      <li>Linux: gcc / g++ is installed by default on most Linux distros</li>
+      <li>Mac: same deal as make - <a href="https://developer.apple.com/xcode/features/">install Xcode command line tools</a></li>
+      <li>Windows: recommend using <a href="http://www.mingw.org/">MinGW</a></li>
+    </ul>
+  </li>
+  <li>wxWidgets &gt;= 3.0
+    <ul>
+      <li>Linux: <code class="language-plaintext highlighter-rouge">sudo apt-get install libwxgtk3.0-dev libwxgtk3.0-0v5</code>. If you are facing unmet dependency issues, refer to the <a href="https://wiki.codelite.org/pmwiki.php/Main/WxWidgets30Binaries#toc2">official page</a> for installing the unmet dependencies.</li>
+      <li>Mac: There is a <a href="https://formulae.brew.sh/formula/wxmac">homebrew installation available</a>.</li>
+      <li>Installation instructions can be found <a href="https://wiki.wxwidgets.org/Install">here</a>. Some version numbers may need to be changed in instructions to install v3.0 or greater.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="basic-build-instructions">Basic Build Instructions</h2>
+
+<ol>
+  <li>Clone this repo.</li>
+  <li>Make a build directory in the top level directory: <code class="language-plaintext highlighter-rouge">mkdir build &amp;&amp; cd build</code></li>
+  <li>Compile: <code class="language-plaintext highlighter-rouge">cmake .. &amp;&amp; make</code></li>
+  <li>Run it: <code class="language-plaintext highlighter-rouge">./membot</code>.</li>
+</ol>
+
+<h2 id="credits">Credits</h2>
+
+<p>The starter code for this project is from the <a href="https://www.udacity.com/course/c-plus-plus-nanodegree--nd213">Udacity C++ Nanodegree Program</a>: Memory Management.</p>
+
+  </article>
 
 </div>
+
     </div>
 
     <!-- Footer -->

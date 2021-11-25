@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Fan's site | Path planning algorithms</title>
+<meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+">
+
+<!-- Open Graph -->
+
+
+<!-- Bootstrap & MDB -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous" />
+
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+<!-- Code Syntax Highlighting -->
+<link rel="stylesheet" href="https://gitcdn.link/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+<!-- Styles -->
+<!-- 
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
+ -->
+<!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>"> -->
+<link rel="shortcut icon" href="/assets/img/favicon.ico">
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<link rel="canonical" href="/projects/path-planning/path-planning/">
+
+<!-- JQuery -->
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+
+<!-- Theming-->
+
+  <script src="/assets/js/theme.js"></script>
+  <!-- Load DarkMode JS -->
+<script src="/assets/js/dark_mode.js"></script>
+
+
+
+
+
+
+    
+<!-- MathJax -->
+<script type="text/javascript">
+  window.MathJax = {
+    tex: {
+      tags: 'ams'
+    }
+  };
+</script>
+<script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"></script>
+<script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+
+  </head>
+
+  <body class="fixed-top-nav sticky-bottom-footer">
+
+    <!-- Header -->
+
+    <header>
+
+    <!-- Nav Bar -->
+    <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      
+      <a class="navbar-brand title font-weight-lighter" href="/">
+        <i class="fas fa-fan fa-spin"></i>
+       Fan's site
+      </a>
+      
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">
+              About
+              
+            </a>
+          </li>
+          
+          <!-- Blog -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/blog/">
+              Blog 
+              
+            </a>
+          </li>
+          
+          <!-- Other pages -->
+          
+          
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/course-work/">
+                Course Work
+                
+              </a>
+          </li>
+          
+          
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/projects/">
+                Projects
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/publications/">
+                Publications
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/research/">
+                Research
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/services/">
+                Services
+                
+              </a>
+          </li>
+          
+          
+          
+          
+          
+            <div class = "toggle-container">
+              <a id = "light-toggle">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+              </a>
+            </div>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+
+    <!-- Content -->
+
+    <div class="container mt-5">
+      <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Path planning algorithms</h1>
+    <!-- <p class="post-description">This project implements path planning algorithms that compute the path in graphs from a start to a goal using Python. Given a occupancy grid map, the algorithms construct a graph in which each free cell is consider a node and any two free cells are considered connected if they are adjacent either horizontally, vertically or diagonally. Then Dijstra and A* algorithms are implemented to find the shortest path between the given two points.
+</p> -->
+  </header>
+
+  <article>
+    <p>Finding the shortest path between two nodes in a graph is a fundamental problem in mobile robotics. The graph can be computed from a occupancy grid map. In particular, each cell with low occupancy probability in the grid map is considered as a node while an edge connects two nodes if they are either vertically, horizontally or diagonally adjacent.</p>
+
+<p>This project implements two path planning algorithms, Dijkstra’s algorithm and A* algorithm.</p>
+
+<p>Dijkstra’s algorithm is essentially generalized version of the best-first search, in the sense that at each time step the unvisited node with the smallest tentative distance is chosen as the current node. The general idea of Dijkstra’s algorithm is</p>
+
+<ol>
+  <li>
+    <p>Create a set of unvisited nodes with an initial tentative distance. In particular, the source node is set to zero while others are infinity.</p>
+  </li>
+  <li>
+    <p>Consider all unvisited neighbors of the current node (initially the source node) and update their tentative distances.</p>
+  </li>
+  <li>
+    <p>Mark the current node as visited which will never be checked again. If the target node is now visited, the algorithm stops. Otherwise, select the node with the smallest tentative distance as the new current node and go back to the previous step.</p>
+  </li>
+</ol>
+
+<p>In fact, the precedures above describe not only Dijkstra’s algorithm but also A* algorithm. The only difference is how to compute the tentative distance. In Dijkstra’s algorithm, the tentative distance is equal to the distance from the source to the current node plus the distance from current node to the neighbor. For A* algorithm, in addition to the distance computed in Dijkstra, one heuristic value is also counted. To find the optimal path, this heuristic value should always be less than or equal to the optimal distance from the neighbor to the goal, e.g, the straight line distance in the Euclidean space.</p>
+
+<p>In this project, both Dijkstra’s algorithm and A* algorithm are implemented. In particular, we implement A* algorithm with different heuristic value which influence the number of cells expanded and the optimality of the solution.</p>
+
+<h2 id="code-explanation">Code Explanation</h2>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">get_neighborhood(cell, occ_map_shape)</code>: Find the neighbors of the input <code class="language-plaintext highlighter-rouge">cell</code>, considering the boundaries of the map.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">get_edge_cost(parent, child, occ_map)</code>: Compute the edge cost between two cells. The occupancy probability is considered in the edge cost, which allows for planning of the shortest collision free path on the grid. A cell is considered as an obstacle if its occupancy probability exceeds a certain threshold.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">get_heuristic(cell, goal):</code> Estimate cost for moving from cell to goal based on heuristic. The cost is equal to the Euclidean distance between the <code class="language-plaintext highlighter-rouge">cell</code> and <code class="language-plaintext highlighter-rouge">goal</code> multiplied by a constant factor.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">run_path_planning(occ_map, start, goal)</code>: Implement overall procedures described above. The previous two functions are called to compute the tentative cost of the neighbors.</p>
+  </li>
+</ol>
+
+<h2 id="results">Results</h2>
+
+<p>Dijkstra’s algorithm finds the optimal solution, i.e., the path with the least path cost.</p>
+
+<div class="row justify-content-sm-center">
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded " src="/projects/path-planning/a-star/assets/img/dijkstra.gif" alt="" title="example image" />
+    </div>
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded " src="/projects/path-planning/a-star/assets/img/dijkstra.png" alt="" title="example image" />
+    </div>
+</div>
+<div class="caption">
+Dijkstra's algorithm,
+Cells expanded: 605;
+Path cost: 36.95;
+Path length: 36.38;
+</div>
+<p><br /></p>
+
+<p>A* algorithm with constant factor 1 also finds the optimal solution but with fewer number of cell expanded.</p>
+
+<div class="row justify-content-sm-center">
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded " src="/projects/path-planning/a-star/assets/img/a1.gif" alt="" title="example image" />
+    </div>
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded " src="/projects/path-planning/a-star/assets/img/a_1.png" alt="" title="example image" />
+    </div>
+</div>
+<div class="caption">
+A* algorithm with constant factor 1,
+Cells expanded: 391;
+Path cost: 36.95;
+Path length: 36.38;
+</div>
+<p><br /></p>
+
+<p>A* algorithm with constant factor 2 which inflates the estimate of the cost to the goal from the cell. The number of cell expanded is much more smaller and the path cost is close to the optimal path.</p>
+
+<div class="row justify-content-sm-center">
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded " src="/projects/path-planning/a-star/assets/img/a2.gif" alt="" title="example image" />
+    </div>
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded " src="/projects/path-planning/a-star/assets/img/a_2.png" alt="" title="example image" />
+    </div>
+</div>
+<div class="caption">
+A* algorithm with constant factor 2,
+Cells expanded: 91;
+Path cost: 38.25;
+Path length: 35.80;
+</div>
+<p><br /></p>
+
+<p>A* algorithm with constant factor 5. The obtained path length is smaller than others. The reason is that when computing the tentative cost the path length has higher weight than the path cost which includes the occupancy probability.</p>
+
+<div class="row justify-content-sm-center">
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded " src="/projects/path-planning/a-star/assets/img/a5.gif" alt="" title="example image" />
+    </div>
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded " src="/projects/path-planning/a-star/assets/img/a_5.png" alt="" title="example image" />
+    </div>
+</div>
+<div class="caption">
+A* algorithm with constant factor 5,
+Cells expanded: 55;
+Path cost: 51.38;
+Path length: 32.38;
+</div>
+<p><br /></p>
+
+<p>A* algorithm with constant factor 10. Even though the constant factor is larger, the path path does not reduce accordingly. The reason could be that the heuristic is not admissible if we consider only the path length. In other words the heuristic value is greater than the optimal path length.</p>
+
+<div class="row justify-content-sm-center">
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded " src="/projects/path-planning/a-star/assets/img/a10.gif" alt="" title="example image" />
+    </div>
+    <div class="col-sm-6 mt-3 mt-md-0">
+        <img class="img-fluid rounded " src="/projects/path-planning/a-star/assets/img/a_10.png" alt="" title="example image" />
+    </div>
+</div>
+<div class="caption">
+A* algorithm with constant factor 10,
+Cells expanded: 39;
+Path cost: 57.33;
+Path length: 42.28;
+</div>
+<p><br /></p>
+
+  </article>
+
+</div>
+
+    </div>
+
+    <!-- Footer -->
+
+    
+<footer class="sticky-bottom mt-5">
+  <div class="container">
+    &copy; Copyright 2021 Fan  Yang.
+    
+    
+    
+    Last updated: November 25, 2021.
+    
+  </div>
+</footer>
+
+
+
+  </body>
+
+  <!-- Bootsrap & MDB scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js" integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+
+  
+<!-- Mansory & imagesLoaded -->
+<script defer src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script defer src="/assets/js/mansory.js" type="text/javascript"></script>
+
+
+  
+
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+
+</html>

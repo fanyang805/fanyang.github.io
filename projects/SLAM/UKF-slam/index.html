@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Fan's site | Fan's site</title>
+<title>Fan's site | Online SLAM with Unscented Kalman Filter</title>
 <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 ">
 
@@ -33,7 +33,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/projects/SLAM/UKF-slam/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -99,7 +99,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="/blog/">
               Blog 
               
@@ -107,8 +107,6 @@
           </li>
           
           <!-- Other pages -->
-          
-          
           
           
           
@@ -183,20 +181,113 @@
     <div class="container mt-5">
       <div class="post">
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2021/RL/">Reinforcement Learning</a></h3>
-        <p class="post-meta">May 2, 2021</p>
-        <p>A summary of Reinforcement Learning</p>
-      </li>
-    
-  </ul>
+  <header class="post-header">
+    <h1 class="post-title">Online SLAM with Unscented Kalman Filter</h1>
+    <!-- <p class="post-description">The idea of Unscented Kalman Filter is similar to EKF by linearizing the transformation of a Gaussian. UKF performs a stochastic linearization through the use of a weighted statistical linear regression process. This project impelements an UKF SLAM system. 
+</p> -->
+  </header>
 
-  
+  <article>
+    <p>Generally speaking, the Kalman filters require linear motion model and sensor model to perform the transformation of Gaussian distribution. In EKF, the first order Taylor expansion is used to linearize the functions at the mean of the belief. An alternative linearization method, called unscented transform is used in the Unscented Kalman Filter. In particular, the UKF extracts a set of points with weights from the Gaussian and passes those points through the nonlinear function. The transformed Gaussian can be recovered from those returned points.</p>
 
+<p>In this project, we implemented a UKF for the online SLAM problem. Similar to the EKF, given the sensor reading, odometry information and the data association<sup>[1]</sup>, the robot estimates the its pose (shown by the red covariance ellipse and bar), the position of map feastures (shown by the blue covariance ellipse) at each time step.</p>
+<div class="row justify-content-center">
+      <div class="col">
+        <div class="w-50 mx-auto" style="background-color: white;">
+            <img class="img-fluid" src="/projects/SLAM/UKF-slam/assets/img/ukf_slam.gif" alt="" />
+        </div>
+      </div>
+  </div>
+<div class="caption">
+  Unscented Kalman Filter Algorithm for the Online SLAM Problem
+  </div>
+<h2 id="ukf-overview">UKF Overview</h2>
+
+<p>The points extracted from a Gaussian is called the sigma points, denoted by \(\chi^{[i]}\) and weight \(w_m^{[i]}\) and \(w_c^{[i]}\). For a \(n\)-dimensional Gaussian with mean \(\mu\) and covariance \(\Sigma\), the sigma points are computed according to:</p>
+
+\[\begin{equation*}
+\begin{split}
+\chi^{[0]} &amp;= \mu \\
+\chi^{[i]} &amp;= \mu + (\sqrt{(n+\lambda)\Sigma})_i, \ &amp;\forall i = 1, ..., n \\
+\chi^{[i]} &amp;= \mu - (\sqrt{(n+\lambda)\Sigma})_{i-n}, \ &amp;\forall i = n+1, ..., 2n \\
+\end{split}
+\end{equation*}\]
+
+<p>where subscript \(i\) denotes the index of the column and \(\lambda\) is a scaling parameter.</p>
+
+<p>The two weights for each sigma point is computed by:</p>
+
+\[\begin{equation*}
+\begin{split}
+w^{[0]}_m &amp;= \frac{\lambda}{n+\lambda} \\
+w^{[0]}_c &amp;= \frac{\lambda}{n+\lambda} + (1-\alpha^2+\beta) \\
+w^{[i]}_m &amp;= w^{[i]}_c = \frac{1}{2(n+\lambda)}, \ \forall i = 1, ..., 2n.
+\end{split}
+\end{equation*}\]
+
+<p>where \(w^{[i]}_m\) is used to recover the mean \(\mu\) while \(w^{[i]}_c\) is used to recover the covariance \(\Sigma\).</p>
+
+<p>The the sigma points are passed to the nonlinear function say \(g(x)\), i.e.,</p>
+
+\[\mathcal{Y}^{[i]} = g(\chi^{[i]})\]
+
+<p>The transformed Gaussian distribution can be recovered from the returned sigma points \(\mathcal{Y}^{[i]}\).</p>
+
+\[\begin{equation*}
+\begin{split}
+\mu' &amp;= \sum_{i=1}^{2n} w_m^{[i]} \mathcal{Y}^{[i]} \\
+\Sigma' &amp;=\sum_{i=1}^{2n} w_c^{[i]}(\mathcal{Y}^{[i]} - \mu') (\mathcal{Y}^{[i]} - \mu')^T
+\end{split}
+\end{equation*}\]
+
+<p>Using the transformation mentioned above, the predication step in EKF can be replaced by the sigma point propagation of the motion model. Similarily in correction step we can pass the obtained sigma points (of the predicted Gaussian) to the sensor model \(h(x)\), and recover the mean and covariance of the expected observation. The Kalman gain then can be computed from the covariance of the observation and the cross-covariance between state and observation. The detailed algorithm<sup>[2]</sup> is shown below:</p>
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="w-50 mx-auto" style="background-color: white;">
+            <img class="img-fluid" src="/projects/SLAM/UKF-slam/assets/img/ukf-slam.png" alt="" />
+        </div>
+    </div>
+</div>
+<div class="caption">
+The Unscented Kalman Filter for Online SLAM 
+</div>
+<p><br /></p>
+
+<p>Note that \(S_t\) in line 9 is equivalent to 
+\(H_t \bar{\Sigma}_t H_t^T + Q_t\) 
+and 
+\(\bar{\Sigma}_t^{x,z}\) in line 10 is equivalent to 
+\(\bar{\Sigma}_t H_t^T\) in computing the Kalman gain in EKF, i.e.,
+\(K_t = \bar{\Sigma}_t H_t^T (H_t \bar{\Sigma}_t H_t^T + Q_t)^{-1}\)</p>
+
+<h2 id="code-explanation">Code Explanation</h2>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">[mu, sigma, sigma_points] = prediction_step(mu, sigma, u)</code>: implement line 2 to 6 of the algorithm above, compute the mean and covariance of the state which includes the robot’s pose and landmark positions.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">[mu, sigma, map] = correction_step(mu, sigma, z, map)</code>: implement the correction step from line 7 to 13 in UKF algorithm, update the mean and covariance of state after the range-bearing sensor measurement.</p>
+  </li>
+</ol>
+
+<h3 id="references">References</h3>
+
+<ol>
+  <li>
+    <p><strong>Robot Mapping</strong><br />
+University of Freiburg, WS 2013/14, <a href="http://ais.informatik.uni-freiburg.de/teaching/ws13/mapping/">http://ais.informatik.uni-freiburg.de/teaching/ws13/mapping/</a></p>
+  </li>
+  <li>
+    <p><strong>Probabilistic Robotics</strong><br />
+S. Thrun, W. Burgard, and D. Fox. MIT Press, Cambridge, Mass., (2005)</p>
+  </li>
+</ol>
+
+  </article>
 
 </div>
+
     </div>
 
     <!-- Footer -->

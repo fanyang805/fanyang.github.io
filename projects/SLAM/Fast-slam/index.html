@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Fan's site | Fan's site</title>
+<title>Fan's site | Full SLAM with FastSLAM Algorithm</title>
 <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 ">
 
@@ -33,7 +33,7 @@
 <link rel="shortcut icon" href="/assets/img/favicon.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/projects/SLAM/Fast-slam/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -99,7 +99,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="/blog/">
               Blog 
               
@@ -107,8 +107,6 @@
           </li>
           
           <!-- Other pages -->
-          
-          
           
           
           
@@ -183,20 +181,124 @@
     <div class="container mt-5">
       <div class="post">
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2021/RL/">Reinforcement Learning</a></h3>
-        <p class="post-meta">May 2, 2021</p>
-        <p>A summary of Reinforcement Learning</p>
-      </li>
-    
-  </ul>
+  <header class="post-header">
+    <h1 class="post-title">Full SLAM with FastSLAM Algorithm</h1>
+    <!-- <p class="post-description">This project implements FastSLAM for full SLAM problem. Unlike the online SLAM algorithms such as EKF that computes the posterior in the current time step, FastSLAM estimates the full path posterior and the locations of features given the range-bearing sensor reading and odometry information. 
+</p> -->
+  </header>
 
-  
+  <article>
+    <p>The FastSLAM algorithm implemented in this project solves the full SLAM problem. It uses particle filters for estimating the robot path while each particle (which is a hypothesis of robot pose) uses separate EKFs to estimate each map feature location, based on the conditional independence between any two disjoint sets of features in the map, given the robot pose. The particle in FastSLAM is denoted as</p>
 
+\[\langle x_t^{[k]}, \mu_{1,t}^{[k]}, \Sigma_{1,t}^{[k]}, ..., \mu_{N,t}^{[k]}, \Sigma_{N,t}^{[k]} \rangle\]
+
+<p>where \(k\) is the index of the particle, \(\mu_{i,t}^{[k]}, \Sigma_{i,t}^{[k]}\) refer to the mean and covariance of the i-th map feature.</p>
+
+<p>The advantage of FastSLAM is</p>
+
+<ol>
+  <li>
+    <p>The data association decision can be made on a per-particle basis. The FastSLAM maintains multiple data associations, in contrast to EKF that tracks only one at any time step</p>
+  </li>
+  <li>
+    <p>The particle filter used in FastSLAM allows the algorithm to deal with the highly nonlinear motion models.</p>
+  </li>
+</ol>
+<div class="row justify-content-center">
+      <div class="col">
+        <div class="w-50 mx-auto" style="background-color: white;">
+            <img class="img-fluid" src="/projects/SLAM/Fast-slam/assets/img/fastslam.gif" alt="" />
+        </div>
+      </div>
+  </div>
+<div class="caption">
+  Full SLAM by FastSLAM algorithm
+  </div>
+
+<p>The particles with the highest weight are in red color. The arrow refers to the current pose of the particle with the highest weight. All other particles are in gray color (some of paths may be disappear because of the resampling step). The blue crosses represent the ground-true position of the landmarks. The blue dots represent the estimated landmark positions of each particle. The ellipse is the error ellipse of estimated landmark positions of the particle with the highest weight.</p>
+
+<h2 id="fastslam-overview">FastSLAM Overview</h2>
+
+<p>The full SLAM problem considered in this project can be written as a posterior:</p>
+
+<p>\(P(x_{0:t},m_{1:N}|z_{1:t},u_{1:t}) = P(x_{0:t}|z_{1:t},u_{1:t}) P(m_{1:N}|x_{0:t},z_{1:t})\).</p>
+
+<p>Based on the conditionally independence of the landmarks given the poses, the latter posterior on the right hand side can be further written as</p>
+
+\[\prod_{i=1}^{N} P(m_i|x_{0:t},z_{1:t})\]
+
+<p>Therefore the full SLAM posterior is equivalent to:</p>
+
+\[P(x_{0:t},m_{1:N}|z_{1:t},u_{1:t}) = P(x_{0:t}|z_{1:t},u_{1:t})\prod_{i=1}^{N} P(m_i|x_{0:t},z_{1:t})\]
+
+<p>The path posterior can be represented by a set of the particles while each particle maintains separate map posterior by EKF, i.e.,</p>
+
+\[\langle x_t^{[k]}, \mu_{1,t}^{[k]}, \Sigma_{1,t}^{[k]}, ..., \mu_{N,t}^{[k]}, \Sigma_{N,t}^{[k]} \rangle\]
+
+<p>The key steps of FastSLAM are following:</p>
+
+<ol>
+  <li>
+    <p>Prediction: Extend the path posterior by sampling a new pose for each particle, based on the motion model (odometry motion model in this project).</p>
+
+\[x_t^{[k]} \sim P(x_t|x_{t-1}^{[k]}, u_t), \ \forall k = 1, ..., N.\]
+  </li>
+  <li>
+    <p>Measurement update: Update belief of each observed landmark by EKF, compute measurement predication by</p>
+
+\[\hat{z}^{[k]} = h(\mu^{[k]}_{j,t-1}, x_t^{[k]})\]
+  </li>
+  <li>
+    <p>Compute the particle weight by</p>
+
+\[w^{[k]} = |2\pi Q|^{-\frac{1}{2}} \exp{(-\frac{1}{2}(z_t - \hat{z}^{[k]})^T Q^{-1} (z_t-\hat{z}^{[k]}))}\]
+  </li>
+</ol>
+
+<p>The detailed algorithm is presented in the pseudocode<sup>[2]</sup> below.</p>
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="w-50 mx-auto" style="background-color: white;">
+            <img class="img-fluid" src="/projects/SLAM/Fast-slam/assets/img/fast-slam.png" alt="" />
+        </div>
+    </div>
+</div>
+<div class="caption">
+The FastSLAM 1.0 
+</div>
+<p><br /></p>
+
+<h2 id="code-explanation">Code Explanation</h2>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sample_motion_model(odometry, particles)</code>: Sample a new pose for each particle by the odometry motion model. Implement line 3 to 4.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">measurement_model(particle, landmark)</code>: Compute the expected measurement for the given landmark and the Jacobian with respect to the landmark. Implement line 12 to 13.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">eval_sensor_model(sensor_data, particles)</code>: Update the estimate of the landmark position based on the range-bearing measurement<sup>[1]</sup> and compute the particle weight.</p>
+  </li>
+</ol>
+
+<h3 id="references">References</h3>
+
+<ol>
+  <li>
+    <p><strong>Introduction to Mobile Robotics</strong><br />
+University of Freiburg, Spring, 2020, <a href="http://ais.informatik.uni-freiburg.de/teaching/ss20/robotics/index_en.php">http://ais.informatik.uni-freiburg.de/teaching/ss20/robotics/index_en.php</a></p>
+  </li>
+  <li>
+    <p><strong>Probabilistic Robotics</strong><br />
+S. Thrun, W. Burgard, and D. Fox. MIT Press, Cambridge, Mass., (2005)</p>
+  </li>
+</ol>
+
+  </article>
 
 </div>
+
     </div>
 
     <!-- Footer -->
